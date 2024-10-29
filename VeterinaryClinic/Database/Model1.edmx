@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ClinicVeterinaryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="Animal_ID" />
+          </Key>
+          <Property Name="Animal_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Species_ID" Type="int" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Gender_ID" Type="int" />
+          <Property Name="Owner_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Gender_ID" />
+          </Key>
+          <Property Name="Gender_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Owner_ID" />
+          </Key>
+          <Property Name="Owner_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Owner_FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Owner_LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Specialization_ID" />
+          </Key>
+          <Property Name="Specialization_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Specialization_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Species">
+          <Key>
+            <PropertyRef Name="Species_ID" />
+          </Key>
+          <Property Name="Species_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Species_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Staff_ID" />
+          </Key>
+          <Property Name="Staff_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Staff_FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Staff_LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Role_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Vet">
+          <Key>
+            <PropertyRef Name="Vet_ID" />
+          </Key>
+          <Property Name="Vet_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vet_FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Vet_LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Specialization_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="Visit_ID" />
+          </Key>
+          <Property Name="Visit_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Visit_Date" Type="date" Nullable="false" />
+          <Property Name="Animal_ID" Type="int" />
+          <Property Name="Vet_ID" Type="int" />
+          <Property Name="Diagnosis" Type="nvarchar" MaxLength="255" />
+          <Property Name="Treatment" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Animal__Gender_I__33D4B598">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="Gender_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__Owner_ID__34C8D9D1">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="Owner_ID" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="Owner_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__Species___35BCFE0A">
+          <End Role="Species" Type="Self.Species" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Species">
+              <PropertyRef Name="Species_ID" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="Species_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__Role_ID__36B12243">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vet__Specializat__37A5467C">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="0..1" />
+          <End Role="Vet" Type="Self.Vet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="Specialization_ID" />
+            </Principal>
+            <Dependent Role="Vet">
+              <PropertyRef Name="Specialization_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visit__Animal_ID__38996AB5">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="Visit" Type="Self.Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="Animal_ID" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="Animal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visit__Vet_ID__398D8EEE">
+          <End Role="Vet" Type="Self.Vet" Multiplicity="0..1" />
+          <End Role="Visit" Type="Self.Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vet">
+              <PropertyRef Name="Vet_ID" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="Vet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ClinicVeterinaryModelContainer">
+          <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Species" EntityType="Self.Species" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vet" EntityType="Self.Vet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visit" EntityType="Self.Visit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Animal__Gender_I__33D4B598" Association="Self.FK__Animal__Gender_I__33D4B598">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__Owner_ID__34C8D9D1" Association="Self.FK__Animal__Owner_ID__34C8D9D1">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__Species___35BCFE0A" Association="Self.FK__Animal__Species___35BCFE0A">
+            <End Role="Species" EntitySet="Species" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__Role_ID__36B12243" Association="Self.FK__Staff__Role_ID__36B12243">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vet__Specializat__37A5467C" Association="Self.FK__Vet__Specializat__37A5467C">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="Vet" EntitySet="Vet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visit__Animal_ID__38996AB5" Association="Self.FK__Visit__Animal_ID__38996AB5">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Visit" EntitySet="Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visit__Vet_ID__398D8EEE" Association="Self.FK__Visit__Vet_ID__398D8EEE">
+            <End Role="Vet" EntitySet="Vet" />
+            <End Role="Visit" EntitySet="Visit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicVeterinaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="Animal_ID" />
+          </Key>
+          <Property Name="Animal_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Species_ID" Type="Int32" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Gender_ID" Type="Int32" />
+          <Property Name="Owner_ID" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__Animal__Gender_I__33D4B598" FromRole="Animal" ToRole="Gender" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK__Animal__Owner_ID__34C8D9D1" FromRole="Animal" ToRole="Owner" />
+          <NavigationProperty Name="Species" Relationship="Self.FK__Animal__Species___35BCFE0A" FromRole="Animal" ToRole="Species" />
+          <NavigationProperty Name="Visit" Relationship="Self.FK__Visit__Animal_ID__38996AB5" FromRole="Animal" ToRole="Visit" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Gender_ID" />
+          </Key>
+          <Property Name="Gender_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__Animal__Gender_I__33D4B598" FromRole="Gender" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Owner_ID" />
+          </Key>
+          <Property Name="Owner_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Owner_FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Owner_LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__Animal__Owner_ID__34C8D9D1" FromRole="Owner" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__Role_ID__36B12243" FromRole="Role" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Specialization_ID" />
+          </Key>
+          <Property Name="Specialization_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Specialization_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Vet" Relationship="Self.FK__Vet__Specializat__37A5467C" FromRole="Specialization" ToRole="Vet" />
+        </EntityType>
+        <EntityType Name="Species">
+          <Key>
+            <PropertyRef Name="Species_ID" />
+          </Key>
+          <Property Name="Species_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Species_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__Animal__Species___35BCFE0A" FromRole="Species" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Staff_ID" />
+          </Key>
+          <Property Name="Staff_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Staff_FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Staff_LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role_ID" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Staff__Role_ID__36B12243" FromRole="Staff" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Vet">
+          <Key>
+            <PropertyRef Name="Vet_ID" />
+          </Key>
+          <Property Name="Vet_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vet_FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Vet_LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Specialization_ID" Type="Int32" />
+          <NavigationProperty Name="Specialization" Relationship="Self.FK__Vet__Specializat__37A5467C" FromRole="Vet" ToRole="Specialization" />
+          <NavigationProperty Name="Visit" Relationship="Self.FK__Visit__Vet_ID__398D8EEE" FromRole="Vet" ToRole="Visit" />
+        </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="Visit_ID" />
+          </Key>
+          <Property Name="Visit_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Visit_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Animal_ID" Type="Int32" />
+          <Property Name="Vet_ID" Type="Int32" />
+          <Property Name="Diagnosis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Treatment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK__Visit__Animal_ID__38996AB5" FromRole="Visit" ToRole="Animal" />
+          <NavigationProperty Name="Vet" Relationship="Self.FK__Visit__Vet_ID__398D8EEE" FromRole="Visit" ToRole="Vet" />
+        </EntityType>
+        <Association Name="FK__Animal__Gender_I__33D4B598">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="Gender_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__Owner_ID__34C8D9D1">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="Owner_ID" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="Owner_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__Species___35BCFE0A">
+          <End Role="Species" Type="Self.Species" Multiplicity="0..1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Species">
+              <PropertyRef Name="Species_ID" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="Species_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visit__Animal_ID__38996AB5">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="Visit" Type="Self.Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="Animal_ID" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="Animal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__Role_ID__36B12243">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vet__Specializat__37A5467C">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="0..1" />
+          <End Role="Vet" Type="Self.Vet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="Specialization_ID" />
+            </Principal>
+            <Dependent Role="Vet">
+              <PropertyRef Name="Specialization_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visit__Vet_ID__398D8EEE">
+          <End Role="Vet" Type="Self.Vet" Multiplicity="0..1" />
+          <End Role="Visit" Type="Self.Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vet">
+              <PropertyRef Name="Vet_ID" />
+            </Principal>
+            <Dependent Role="Visit">
+              <PropertyRef Name="Vet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicVeterinaryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animal" EntityType="Self.Animal" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" />
+          <EntitySet Name="Species" EntityType="Self.Species" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Vet" EntityType="Self.Vet" />
+          <EntitySet Name="Visit" EntityType="Self.Visit" />
+          <AssociationSet Name="FK__Animal__Gender_I__33D4B598" Association="Self.FK__Animal__Gender_I__33D4B598">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__Owner_ID__34C8D9D1" Association="Self.FK__Animal__Owner_ID__34C8D9D1">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__Species___35BCFE0A" Association="Self.FK__Animal__Species___35BCFE0A">
+            <End Role="Species" EntitySet="Species" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visit__Animal_ID__38996AB5" Association="Self.FK__Visit__Animal_ID__38996AB5">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Visit" EntitySet="Visit" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__Role_ID__36B12243" Association="Self.FK__Staff__Role_ID__36B12243">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vet__Specializat__37A5467C" Association="Self.FK__Vet__Specializat__37A5467C">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="Vet" EntitySet="Vet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visit__Vet_ID__398D8EEE" Association="Self.FK__Visit__Vet_ID__398D8EEE">
+            <End Role="Vet" EntitySet="Vet" />
+            <End Role="Visit" EntitySet="Visit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ClinicVeterinaryModelContainer" CdmEntityContainer="ClinicVeterinaryEntities">
+          <EntitySetMapping Name="Animal">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Animal">
+              <MappingFragment StoreEntitySet="Animal">
+                <ScalarProperty Name="Animal_ID" ColumnName="Animal_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Species_ID" ColumnName="Species_ID" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+                <ScalarProperty Name="Owner_ID" ColumnName="Owner_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+                <ScalarProperty Name="Gender_Name" ColumnName="Gender_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owner">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="Owner_ID" ColumnName="Owner_ID" />
+                <ScalarProperty Name="Owner_FirstName" ColumnName="Owner_FirstName" />
+                <ScalarProperty Name="Owner_LastName" ColumnName="Owner_LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialization">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Specialization">
+              <MappingFragment StoreEntitySet="Specialization">
+                <ScalarProperty Name="Specialization_ID" ColumnName="Specialization_ID" />
+                <ScalarProperty Name="Specialization_Name" ColumnName="Specialization_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Species">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Species">
+              <MappingFragment StoreEntitySet="Species">
+                <ScalarProperty Name="Species_ID" ColumnName="Species_ID" />
+                <ScalarProperty Name="Species_Name" ColumnName="Species_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
+                <ScalarProperty Name="Staff_FirstName" ColumnName="Staff_FirstName" />
+                <ScalarProperty Name="Staff_LastName" ColumnName="Staff_LastName" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vet">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Vet">
+              <MappingFragment StoreEntitySet="Vet">
+                <ScalarProperty Name="Vet_ID" ColumnName="Vet_ID" />
+                <ScalarProperty Name="Vet_FirstName" ColumnName="Vet_FirstName" />
+                <ScalarProperty Name="Vet_LastName" ColumnName="Vet_LastName" />
+                <ScalarProperty Name="Specialization_ID" ColumnName="Specialization_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visit">
+            <EntityTypeMapping TypeName="ClinicVeterinaryModel.Visit">
+              <MappingFragment StoreEntitySet="Visit">
+                <ScalarProperty Name="Visit_ID" ColumnName="Visit_ID" />
+                <ScalarProperty Name="Visit_Date" ColumnName="Visit_Date" />
+                <ScalarProperty Name="Animal_ID" ColumnName="Animal_ID" />
+                <ScalarProperty Name="Vet_ID" ColumnName="Vet_ID" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Treatment" ColumnName="Treatment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
