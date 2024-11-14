@@ -15,5 +15,7 @@ namespace VeterinaryClinic
     public partial class App : Application
     {
         public static ClinicVeterinaryEntities db = new ClinicVeterinaryEntities();
+        public static Vet veti;
+
     }
 }

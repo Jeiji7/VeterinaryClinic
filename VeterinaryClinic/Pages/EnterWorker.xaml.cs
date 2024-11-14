@@ -39,7 +39,8 @@ namespace VeterinaryClinic.Pages
             {
                 LastNameTB.Text = "";
                 FirstNameTB.Text = "";
-                NavigationService.Navigate(new Pages.RecordClient());
+                App.veti = currentVet;
+                NavigationService.Navigate(new Pages.RecordClient(currentVet));
             }
             else
             {

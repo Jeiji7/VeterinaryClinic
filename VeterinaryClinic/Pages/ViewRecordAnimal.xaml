@@ -1,0 +1,41 @@
+﻿<Page x:Class="VeterinaryClinic.Pages.ViewRecordAnimal"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VeterinaryClinic.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ViewRecordAnimal">
+
+    <Grid Background="Aqua">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" Margin="10 10" FontWeight="Black"  FontSize="20" x:Name="TitleServiceTB" TextWrapping="Wrap" >Список записей</TextBlock>
+                <ListView  Name ="VisitList"  Width="760" Height="300" HorizontalAlignment="Center"  FontSize="18">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="№" Width="40" DisplayMemberBinding="{Binding Visit_ID}"></GridViewColumn>
+                                <GridViewColumn Header="Дата" Width="100" DisplayMemberBinding="{Binding Visit_Date}"></GridViewColumn>
+                                <GridViewColumn Header="Животное" Width="120" DisplayMemberBinding="{Binding Animal.Name}"></GridViewColumn>
+                                <GridViewColumn Header="Врач" Width="140" DisplayMemberBinding="{Binding Vet.Vet_LastName}"></GridViewColumn>
+                                <GridViewColumn Header="Диагноз" Width="160" DisplayMemberBinding="{Binding Diagnosis}"></GridViewColumn>
+                                <GridViewColumn Header="Процедура" Width="180">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Treatment}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+        </StackPanel>
+        <Button Grid.Row="1" Width="120" Height="40" Margin="10" Click="Button_Click_Back">назад</Button>
+    </Grid>
+</Page>

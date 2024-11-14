@@ -126,6 +126,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ViewRecordAnimal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\EnterWorker.xaml.cs">
@@ -133,6 +137,9 @@
     </Compile>
     <Compile Include="Pages\RecordClient.xaml.cs">
       <DependentUpon>RecordClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ViewRecordAnimal.xaml.cs">
+      <DependentUpon>ViewRecordAnimal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
