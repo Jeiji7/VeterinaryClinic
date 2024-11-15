@@ -122,7 +122,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RecordClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegistrationAnimal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,8 +143,14 @@
     <Compile Include="Pages\EnterWorker.xaml.cs">
       <DependentUpon>EnterWorker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RecordClient.xaml.cs">
       <DependentUpon>RecordClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrationAnimal.xaml.cs">
+      <DependentUpon>RegistrationAnimal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ViewRecordAnimal.xaml.cs">
       <DependentUpon>ViewRecordAnimal.xaml</DependentUpon>
